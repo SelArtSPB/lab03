@@ -39,11 +39,14 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressLint("DefaultLocale")
     public  void  onCalc(View v)
-    {
+    { 
+        
+
         chk[0] = findViewById(R.id.Apple);
         chk[1] = findViewById(R.id.Strawberry);
         chk[2] = findViewById(R.id.Bluberry);
         chk[3] = findViewById(R.id.Potatoes);
+
 
         num[0] = findViewById(R.id.AppleQuantity);
         num[1] = findViewById(R.id.StrawberryQuantity);
@@ -58,13 +61,33 @@ public class MainActivity extends AppCompatActivity
         RadioButton button1 = findViewById(R.id.Dialog);
         RadioButton button2 = findViewById(R.id.Toasts);
 
+        String res = "";
+        for (int i = 0; i < 4; i++)
+        {
+            if (num[i].getText().toString().equals("") || val[i].getText().toString().equals(""))
+            {
+                res = ("ERROR Empty Box('s)");
+                Toast toast = Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 150);
+                toast.show();
+                return;
+            }
+        }
+
         int n = 4;
         boolean a = false;
         double itog = 0;
-        String res = "";
 
       for (int i = 0; i < n; i++)
       {
+        if (num[i].getText().toString() == "" || val[i].getText().toString() ==  "")
+        {
+            res = ("Nothing Selected");
+            Toast toast = Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 150);
+            toast.show();
+            break;
+        }
         if (chk[i].isChecked()){
             double q = Double.parseDouble(num[i].getText().toString());
             double sum = q * Double.parseDouble(val[i].getText().toString());
